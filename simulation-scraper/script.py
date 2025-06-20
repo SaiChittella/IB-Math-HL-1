@@ -71,7 +71,7 @@ try:
                 if float(row_data[1][:-1]) < 0 or float(row_data[2][:-1]) < 0:
                     continue
                 all_rows.append(row_data)
-
+                print(row_data)
         
         driver.back()
 
@@ -83,27 +83,27 @@ finally:
     driver.quit()
 
 
-panel_azimuth_degrees = 180
-panel_tilt_degrees = [0,4,7,9,11,12,15,17.5,19,20,21,22.5]
+# panel_azimuth_degrees = 180
+# panel_tilt_degrees = [0,4,7,9,11,12,15,17.5,19,20,21,22.5]
 
-for panel_tilt in panel_tilt_degrees:
-    panel_tilt_radians = math.radians(panel_tilt)
+# for panel_tilt in panel_tilt_degrees:
+#     panel_tilt_radians = math.radians(panel_tilt)
 
-    cos_theta_sum = 0.0
+#     cos_theta_sum = 0.0
 
-    for row in all_rows:
-        # Angle of incidence
-        sun_altitude_str = row[1]
-        sun_altitude = float(sun_altitude_str[:-1]) 
+#     for row in all_rows:
+#         # Angle of incidence
+#         sun_altitude_str = row[1]
+#         sun_altitude = float(sun_altitude_str[:-1]) 
 
-        sun_azimuth_str = row[2]
-        sun_azimuth = float(sun_azimuth_str[:-1])
+#         sun_azimuth_str = row[2]
+#         sun_azimuth = float(sun_azimuth_str[:-1])
 
-        cos_theta_i = (math.sin(math.radians(sun_altitude)) * math.cos(panel_tilt_radians)) + (math.cos(math.radians(sun_altitude)) * math.sin(panel_tilt_radians) * math.cos(math.radians(sun_azimuth - panel_azimuth_degrees)))
+#         cos_theta_i = (math.sin(math.radians(sun_altitude)) * math.cos(panel_tilt_radians)) + (math.cos(math.radians(sun_altitude)) * math.sin(panel_tilt_radians) * math.cos(math.radians(sun_azimuth - panel_azimuth_degrees)))
 
-        cos_theta_sum += cos_theta_i
+#         cos_theta_sum += cos_theta_i
 
-    print(f'{panel_tilt}° Incidence Sum: {cos_theta_sum}')
+#     print(f'{panel_tilt}° Incidence Sum: {cos_theta_sum}')
 
-    energy = cos_theta_sum * 1.6 * 0.2
-    print(f'{panel_tilt} Energy Sum: {energy} \n') 
+#     energy = cos_theta_sum * 1.6 * 0.2
+#     print(f'{panel_tilt} Energy Sum: {energy} \n') 
